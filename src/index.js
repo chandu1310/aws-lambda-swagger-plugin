@@ -25,28 +25,39 @@ class ServerlessPlugin {
     };
 
     this.hooks = {
-      'before:welcome:hello': this.beforeWelcome.bind(this),
-      'welcome:hello': this.welcomeUser.bind(this),
-      'welcome:world': this.displayHelloMessage.bind(this),
-      'after:welcome:world': this.afterHelloWorld.bind(this),
+      'before:welcome:hello': this.beforeWelcomeHello.bind(this),
+      'welcome:hello': this.hello.bind(this),
+      'after:welcome:hello': this.afterWelcomeHello.bind(this),
+      'before:welcome:world': this.beforeWelcomeWorld.bind(this),
+      'welcome:world': this.world.bind(this),
+      'after:welcome:world': this.afterWelcomeWorld.bind(this),
     };
   }
 
-  beforeWelcome() {
-    this.serverless.cli.log('Hello from Serverless!');
+  beforeWelcomeHello() {
+    this.serverless.cli.log('Before Welcome Hello');
   }
 
-  welcomeUser() {
-    this.serverless.cli.log('Your message:');
+  hello() {
+    this.serverless.cli.log('Hello');
   }
 
-  displayHelloMessage() {
-    this.serverless.cli.log(`${this.options.message}`);
+  afterWelcomeHello() {
+    this.serverless.cli.log('After Welcome Hello');
   }
 
-  afterHelloWorld() {
-    this.serverless.cli.log('Please come again!');
+  beforeWelcomeWorld() {
+    this.serverless.cli.log('Before Welcome World');
   }
+
+  world() {
+    this.serverless.cli.log(`World ${this.options.message}`);
+  }
+
+  afterWelcomeWorld() {
+    this.serverless.cli.log('After Welcome World');
+  }
+
 }
 
 module.exports = ServerlessPlugin;
